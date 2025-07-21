@@ -1,23 +1,20 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Lock, Mail, User } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Lock, Mail } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Simulate API call
     setTimeout(() => {
       setLoading(false);
       toast({
@@ -28,155 +25,73 @@ const Login = () => {
     }, 1000);
   };
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Account created!",
-        description: "Welcome to Finance Management System.",
-      });
-      navigate("/");
-    }, 1000);
-  };
-
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div
+      className="min-h-screen flex items-center justify-center p-4"
+      style={{
+        backgroundImage: 'url("/images/bg.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "bottom",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        width: "100vw",
+        fontFamily: "Segoe UI",
+      }}
+    >
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
-            <Building className="w-8 h-8 text-primary-foreground" />
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-17 h-17 rounded-2xl mb-4 mx-auto">
+            <img src="/images/Positive Dynamic (1).png" alt="Logo" width="106" height="72" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">FinanceScope</h1>
-          <p className="text-muted-foreground">Resource Supply Finance Management</p>
+          <h1 className="text-4xl font-bold text-white mb-2">FinanceScope</h1>
         </div>
-
-        <Card className="glass-effect border-border/50">
-          <CardHeader className="text-center">
-            <CardTitle>Welcome</CardTitle>
-            <CardDescription>
-              Sign in to your account or create a new one
-            </CardDescription>
+        <Card
+          className="border border-white/10"
+          style={{ backgroundColor: "#DCDFE8", width: '450px', height: '380px' }}
+        >
+          <CardHeader className="text-center mb-[-8px]">
+            <CardTitle className="text-black" style={{ fontSize: '28px' }}>Welcome Back</CardTitle>
           </CardHeader>
-          
           <CardContent>
-            <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Sign In</TabsTrigger>
-                <TabsTrigger value="register">Register</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="login">
-                <form onSubmit={handleLogin} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="Enter your email"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Enter your password"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-primary hover:bg-primary/90" 
-                    disabled={loading}
-                  >
-                    {loading ? "Signing in..." : "Sign In"}
-                  </Button>
-                </form>
-              </TabsContent>
-              
-              <TabsContent value="register">
-                <form onSubmit={handleRegister} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company Name</Label>
-                    <div className="relative">
-                      <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="company"
-                        type="text"
-                        placeholder="Your company name"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="Your full name"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="reg-email">Email</Label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="reg-email"
-                        type="email"
-                        placeholder="Enter your email"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="reg-password">Password</Label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="reg-password"
-                        type="password"
-                        placeholder="Create a password"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-primary hover:bg-primary/90" 
-                    disabled={loading}
-                  >
-                    {loading ? "Creating account..." : "Create Account"}
-                  </Button>
-                </form>
-              </TabsContent>
-            </Tabs>
+            <form onSubmit={handleLogin} className="space-y-4 flex items-center justify-center flex-col">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-black">Email</Label>
+                <div className="relative w-[338px] h-[48px]">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-600" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    className="pl-10 bg-gray-100 text-black border border-black-300 w-full h-full"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-black">Password</Label>
+                <div className="relative w-[338px] h-[48px]">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-600" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    className="pl-10 bg-gray-100 text-black border border-black-300 w-full h-full"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6"></div>
+
+              <Button
+                type="submit"
+                className="w-[338px] h-[48px] bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg"
+                disabled={loading}
+              >
+                {loading ? "Signing in..." : "LOG IN"}
+              </Button>
+            </form>
           </CardContent>
         </Card>
       </div>
